@@ -34,7 +34,13 @@ public class MainActivity extends AppCompatActivity implements NettyManager.Read
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initServerManager();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initServerManager();
+                    }
+                }).start();
 
             }
         });
@@ -83,12 +89,12 @@ public class MainActivity extends AppCompatActivity implements NettyManager.Read
 
                 System.out.println("-------------------------");
                 mRead.append(deviceModel.toString()+"\r\n");
-
-                if(mRead.getText().length() > 1600){
+                if(mRead.getText().length() > 1400){
                     mRead.setText("");
                 }
             }
         });
+
     }
 
 }
